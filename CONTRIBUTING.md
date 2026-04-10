@@ -6,7 +6,7 @@ Thank you for your interest in contributing to Umbral! This guide will help you 
 
 ### Prerequisites
 
-- [Rust](https://rustup.rs/) (1.80 or later)
+- [Rust](https://rustup.rs/) (1.85 or later)
 - Python 3.10+ (for integration tests)
 - Git
 

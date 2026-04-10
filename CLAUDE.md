@@ -12,7 +12,7 @@ It reads/writes `uv.lock` and respects `[tool.uv]` config so existing uv project
 - `cargo test -p umbral-pep440` -- test single crate
 - `cargo run -p umbral-cli -- <command>` -- run CLI locally
 
-Rust 1.80+ required. Python 3.10+ needed for integration tests.
+Rust 1.85+ required. Python 3.10+ needed for integration tests.
 
 ## Architecture
 
