@@ -328,7 +328,7 @@ pub fn download_and_install_packages(
                             })?;
 
                             let config = umbral_installer::build::BuildConfig {
-                                python: std::path::PathBuf::from("python3"),
+                                python: std::path::PathBuf::from(if cfg!(windows) { "python" } else { "python3" }),
                                 build_backend: backend,
                                 requires,
                                 backend_path,
