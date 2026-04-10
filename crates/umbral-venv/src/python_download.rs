@@ -463,25 +463,43 @@ pub fn find_installed(install_dir: &Path, version_request: &str) -> Option<Insta
 /// - Windows: `python/python.exe`
 fn python_executable_in(install_path: &Path) -> PathBuf {
     if cfg!(windows) {
-        // Try both layouts
-        let direct = install_path.join("python.exe");
-        if direct.exists() {
-            return direct;
+        let candidates = [
+            install_path.join("python.exe"),
+            install_path.join("python").join("python.exe"),
+            install_path
+                .join("python")
+                .join("install")
+                .join("python.exe"),
+            install_path.join("install").join("python.exe"),
+        ];
+        for c in &candidates {
+            if c.exists() {
+                return c.clone();
+            }
         }
-        install_path.join("install").join("python.exe")
+        candidates[0].clone()
     } else {
-        // Try the direct layout first (install_only_stripped)
-        let direct = install_path.join("bin").join("python3");
-        if direct.exists() {
-            return direct;
+        // python-build-standalone archives extract to various layouts:
+        //   install_only_stripped: python/bin/python3
+        //   full:                 python/install/bin/python3
+        //   or directly:          bin/python3
+        let candidates = [
+            install_path.join("bin").join("python3"),
+            install_path.join("python").join("bin").join("python3"),
+            install_path
+                .join("python")
+                .join("install")
+                .join("bin")
+                .join("python3"),
+            install_path.join("install").join("bin").join("python3"),
+        ];
+        for c in &candidates {
+            if c.exists() {
+                return c.clone();
+            }
         }
-        // Try nested install layout
-        let nested = install_path.join("install").join("bin").join("python3");
-        if nested.exists() {
-            return nested;
-        }
-        // Fall back to the direct path (for consistency, even if it doesn't exist yet)
-        direct
+        // Fall back to the first candidate (for consistency)
+        candidates[0].clone()
     }
 }
 
