@@ -1610,12 +1610,24 @@ myapp = mypackage.gui:start
 
         let tmp = tempfile::tempdir().unwrap();
         let venv_root = tmp.path().join("myvenv");
-        let site_packages = venv_root
-            .join("lib")
-            .join("python3.12")
-            .join("site-packages");
-        let bin_dir = venv_root.join("bin");
-        let python_path = bin_dir.join("python");
+        let site_packages = if cfg!(windows) {
+            venv_root.join("Lib").join("site-packages")
+        } else {
+            venv_root
+                .join("lib")
+                .join("python3.12")
+                .join("site-packages")
+        };
+        let bin_dir = if cfg!(windows) {
+            venv_root.join("Scripts")
+        } else {
+            venv_root.join("bin")
+        };
+        let python_path = if cfg!(windows) {
+            bin_dir.join("python.exe")
+        } else {
+            bin_dir.join("python")
+        };
         fs::create_dir_all(&site_packages).unwrap();
         fs::create_dir_all(&bin_dir).unwrap();
 
@@ -1637,7 +1649,7 @@ myapp = mypackage.gui:start
         zip_writer
             .write_all(b"Wheel-Version: 1.0\nGenerator: test\n")
             .unwrap();
-        // A .data/scripts entry — should get ../../../bin/myscript in RECORD
+        // A .data/scripts entry — RECORD should use platform-appropriate relative path
         zip_writer
             .start_file("scriptpkg-1.0.0.data/scripts/myscript", options)
             .unwrap();
