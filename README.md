@@ -122,7 +122,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup and guidelines.
 
 ## Governance
 
-Umbral is stewarded by [Moonshot Ideas](https://github.com/moonshotideas) with a commitment to transfer governance to an independent foundation at 1.0. See [GOVERNANCE.md](GOVERNANCE.md).
+Umbral is stewarded by [Orla Labs](https://github.com/Orla-Labs) with a commitment to transfer governance to an independent foundation at 1.0. See [GOVERNANCE.md](GOVERNANCE.md).
 
 ## License
 

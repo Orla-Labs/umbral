@@ -4,9 +4,9 @@ Umbral exists because open-source infrastructure must remain community-governed.
 
 ## Stewardship
 
-[Moonshot Ideas](https://github.com/moonshotideas) is the current steward of the Umbral project. We are committed to transferring governance to an independent foundation once the project reaches 1.0 stability.
+[Orla Labs](https://github.com/Orla-Labs) is the current steward of the Umbral project. We are committed to transferring governance to an independent foundation once the project reaches 1.0 stability.
 
-Until that transition, Moonshot Ideas funds development, maintains infrastructure, and ensures the project stays aligned with its mission: providing a fast, reliable, open-source Python package manager that belongs to the community.
+Until that transition, Orla Labs funds development, maintains infrastructure, and ensures the project stays aligned with its mission: providing a fast, reliable, open-source Python package manager that belongs to the community.
 
 ## Decision-Making
 
@@ -52,7 +52,7 @@ Maintainers may step down at any time by notifying the other maintainers. Mainta
 
 All participants in the Umbral project are expected to follow our [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/). We are committed to providing a welcoming and inclusive environment for everyone.
 
-Reports of abusive, harassing, or otherwise unacceptable behavior may be sent to opensource@moonshotideas.com.
+Reports of abusive, harassing, or otherwise unacceptable behavior may be sent to opensource@orlalabs.com.
 
 ## Foundation Transition
 
