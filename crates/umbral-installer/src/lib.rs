@@ -786,7 +786,8 @@ fn relative_path_from(base: &Path, target: &Path) -> String {
         result.push(component);
     }
 
-    result.to_string_lossy().to_string()
+    // RECORD files require forward slashes per the wheel spec, even on Windows
+    result.to_string_lossy().replace('\\', "/")
 }
 
 /// Make a file executable on Unix.
@@ -1391,12 +1392,17 @@ myapp = mypackage.gui:start
         let record = fs::read_to_string(dist.dist_info_dir.join("RECORD")).unwrap();
 
         // Both console scripts must appear in RECORD with hash and size
+        let expected_prefix = if cfg!(windows) {
+            "../../Scripts"
+        } else {
+            "../../../bin"
+        };
         assert!(
-            record.contains("../../../bin/mytool,sha256="),
+            record.contains(&format!("{expected_prefix}/mytool,sha256=")),
             "RECORD should contain mytool script entry:\n{record}"
         );
         assert!(
-            record.contains("../../../bin/other,sha256="),
+            record.contains(&format!("{expected_prefix}/other,sha256=")),
             "RECORD should contain other script entry:\n{record}"
         );
     }
@@ -1670,10 +1676,15 @@ myapp = mypackage.gui:start
 
         let record = fs::read_to_string(dist.dist_info_dir.join("RECORD")).unwrap();
 
-        // Scripts: RECORD entry must use ../../../bin/myscript, NOT the zip path
+        // Scripts: RECORD entry must use relative path to bin, NOT the zip path
+        let expected_bin_prefix = if cfg!(windows) {
+            "../../Scripts"
+        } else {
+            "../../../bin"
+        };
         assert!(
-            record.contains("../../../bin/myscript,sha256="),
-            "RECORD entry for .data/scripts/ should use ../../../bin/ relative path, \
+            record.contains(&format!("{expected_bin_prefix}/myscript,sha256=")),
+            "RECORD entry for .data/scripts/ should use {expected_bin_prefix}/ relative path, \
              not the zip-internal path. Got:\n{record}"
         );
         assert!(
