@@ -534,7 +534,8 @@ mod tests {
     fn test_find_tool_scripts() {
         let tmp = tempfile::tempdir().unwrap();
         let venv = tmp.path().join("test-venv");
-        let bin = venv.join("bin");
+        let bin_name = if cfg!(windows) { "Scripts" } else { "bin" };
+        let bin = venv.join(bin_name);
         std::fs::create_dir_all(&bin).unwrap();
 
         // Create some fake scripts
