@@ -622,9 +622,13 @@ mod tests {
         assert!(info.site_packages.exists());
         assert!(venv_path.join("include").exists());
 
-        // Check symlinks
-        assert!(info.bin_dir.join("python").exists());
-        assert!(info.bin_dir.join("python3").exists());
+        // Check Python binary exists
+        if cfg!(windows) {
+            assert!(info.bin_dir.join("python.exe").exists());
+        } else {
+            assert!(info.bin_dir.join("python").exists());
+            assert!(info.bin_dir.join("python3").exists());
+        }
 
         // Check pyvenv.cfg
         let cfg = std::fs::read_to_string(venv_path.join("pyvenv.cfg")).unwrap();
@@ -632,13 +636,16 @@ mod tests {
         assert!(cfg.contains(&format!("version = {}", interp.version)));
         assert!(cfg.contains("prompt = (test-project)"));
 
-        // Check activation script
-        let activate = std::fs::read_to_string(info.bin_dir.join("activate")).unwrap();
-        assert!(activate.contains("VIRTUAL_ENV="));
-        assert!(activate.contains("(test-project)"));
-
-        // Check fish activation
-        assert!(info.bin_dir.join("activate.fish").exists());
+        if cfg!(windows) {
+            // Check PowerShell activation script
+            assert!(info.bin_dir.join("Activate.ps1").exists());
+        } else {
+            // Check activation scripts
+            let activate = std::fs::read_to_string(info.bin_dir.join("activate")).unwrap();
+            assert!(activate.contains("VIRTUAL_ENV="));
+            assert!(activate.contains("(test-project)"));
+            assert!(info.bin_dir.join("activate.fish").exists());
+        }
     }
 
     #[test]
@@ -680,10 +687,12 @@ mod tests {
             major_minor: "3.12".to_string(),
             prefix: PathBuf::from("/usr"),
         };
-        assert_eq!(
-            interp.site_packages_rel(),
-            PathBuf::from("lib/python3.12/site-packages")
-        );
+        let rel = interp.site_packages_rel();
+        if cfg!(windows) {
+            assert_eq!(rel, PathBuf::from("Lib").join("site-packages"));
+        } else {
+            assert_eq!(rel, PathBuf::from("lib/python3.12/site-packages"));
+        }
     }
 
     // ── Version matching tests ──────────────────────────────────────
