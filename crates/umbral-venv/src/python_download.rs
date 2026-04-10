@@ -1134,7 +1134,8 @@ mod tests {
         let tmp = tempfile::tempdir().unwrap();
         let install_dir = tmp.path();
 
-        let dist = find_distribution("3.12").expect("should find a 3.12.x distribution");
+        // Use 3.12.7 specifically — it has verified URLs/hashes (newer versions have placeholders)
+        let dist = find_distribution("3.12.7").expect("should find 3.12.7 distribution");
 
         let executable = download_and_install(&dist, install_dir)
             .await
