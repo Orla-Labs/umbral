@@ -1,0 +1,29 @@
+[package]
+name = "umbral-pypi-client"
+version = "0.4.0"
+description = "Async PyPI Simple API client with PEP 503/691/658 support"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+
+[dependencies]
+umbral-pep440 = { workspace = true }
+umbral-pep508 = { workspace = true }
+reqwest = { workspace = true }
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+scraper = { workspace = true }
+sha2 = { workspace = true }
+hex = { workspace = true }
+url = { workspace = true }
+tracing = { workspace = true }
+thiserror = { workspace = true }
+zip = { workspace = true }
+
+[dev-dependencies]
+wiremock = { workspace = true }
+tokio = { workspace = true }
+insta = { workspace = true }

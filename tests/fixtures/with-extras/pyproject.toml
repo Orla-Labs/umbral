@@ -1,0 +1,22 @@
+[project]
+name = "extras-app"
+version = "0.5.0"
+requires-python = ">=3.9"
+dependencies = [
+    "httpx>=0.26",
+    "pydantic>=2.5",
+]
+
+[project.optional-dependencies]
+redis = ["redis>=5.0", "hiredis>=2.0"]
+postgres = ["asyncpg>=0.29", "psycopg[binary]>=3.1"]
+all = [
+    "redis>=5.0",
+    "hiredis>=2.0",
+    "asyncpg>=0.29",
+    "psycopg[binary]>=3.1",
+]
+
+[build-system]
+requires = ["hatchling>=1.21"]
+build-backend = "hatchling.build"

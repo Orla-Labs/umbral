@@ -1,0 +1,13 @@
+[project]
+name = "simple-app"
+version = "1.0.0"
+requires-python = ">=3.10"
+dependencies = [
+    "requests>=2.28",
+    "click>=8.0",
+    "rich>=13.0",
+]
+
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"

@@ -1,0 +1,30 @@
+[package]
+name = "umbral-installer"
+version = "0.4.0"
+description = "Wheel installer with global cache and hardlink/copy/clone support"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+
+[dependencies]
+umbral-pep440 = { workspace = true }
+umbral-pypi-client = { workspace = true }
+umbral-venv = { workspace = true }
+reqwest = { workspace = true }
+tokio = { workspace = true }
+zip = { workspace = true }
+sha2 = { workspace = true }
+hex = { workspace = true }
+base64 = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+tempfile = { workspace = true }
+flate2 = { workspace = true }
+tar = { workspace = true }
+
+[dev-dependencies]
+tempfile = { workspace = true }
+zip = { workspace = true }

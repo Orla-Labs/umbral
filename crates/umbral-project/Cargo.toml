@@ -1,0 +1,23 @@
+[package]
+name = "umbral-project"
+version = "0.4.0"
+description = "pyproject.toml reader for PEP 621/518/735"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+
+[dependencies]
+umbral-pep440 = { workspace = true }
+umbral-pep508 = { workspace = true }
+serde = { workspace = true }
+toml = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+indexmap = { workspace = true }
+glob = { workspace = true }
+
+[dev-dependencies]
+insta = { workspace = true }
+tempfile = { workspace = true }

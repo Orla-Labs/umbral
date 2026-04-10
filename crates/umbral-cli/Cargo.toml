@@ -1,0 +1,39 @@
+[package]
+name = "umbral-cli"
+version = "0.4.0"
+description = "Umbral CLI: a fast, open-source Python package manager"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+
+[[bin]]
+name = "umbral"
+path = "src/main.rs"
+
+[dependencies]
+umbral-pep440 = { workspace = true }
+umbral-pep508 = { workspace = true }
+umbral-pypi-client = { workspace = true }
+umbral-project = { workspace = true }
+umbral-resolver = { workspace = true }
+umbral-lockfile = { workspace = true }
+umbral-venv = { workspace = true }
+umbral-installer = { workspace = true }
+clap = { workspace = true, features = ["env"] }
+tokio = { workspace = true }
+toml_edit = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+miette = { workspace = true }
+indicatif = { workspace = true }
+owo-colors = { workspace = true }
+url = { workspace = true }
+tempfile = { workspace = true }
+reqwest = { workspace = true }
+sha2 = { workspace = true }
+hex = { workspace = true }
+
+[dev-dependencies]
+tempfile = { workspace = true }
