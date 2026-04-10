@@ -54,9 +54,15 @@ pub fn cmd_build(args: BuildArgs) -> Result<()> {
     let python = if let Some(p) = args.python {
         p
     } else {
-        let venv_python = project_dir.join(".venv").join("bin").join("python3");
+        let venv_python = if cfg!(windows) {
+            project_dir.join(".venv").join("Scripts").join("python.exe")
+        } else {
+            project_dir.join(".venv").join("bin").join("python3")
+        };
         if venv_python.exists() {
             venv_python
+        } else if cfg!(windows) {
+            PathBuf::from("python")
         } else {
             PathBuf::from("python3")
         }
