@@ -66,7 +66,7 @@ impl VersionSpecifier {
     pub fn contains(&self, version: &Version) -> bool {
         // For specifier matching, ignore local version of the candidate
         // unless the specifier itself has a local version.
-        let candidate = if self.version.as_ref().map_or(true, |v| v.local.is_empty()) {
+        let candidate = if self.version.as_ref().is_none_or(|v| v.local.is_empty()) {
             version.without_local()
         } else {
             version.clone()
