@@ -1259,10 +1259,22 @@ mod tests {
 
     /// Helper: find a python3 interpreter in PATH.
     fn which_python() -> Option<std::path::PathBuf> {
-        for name in &["python3", "python"] {
-            if let Ok(output) = Command::new("which").arg(name).output() {
+        let candidates = if cfg!(windows) {
+            vec!["python", "python3"]
+        } else {
+            vec!["python3", "python"]
+        };
+        let which_cmd = if cfg!(windows) { "where" } else { "which" };
+        for name in &candidates {
+            if let Ok(output) = Command::new(which_cmd).arg(name).output() {
                 if output.status.success() {
-                    let path = String::from_utf8_lossy(&output.stdout).trim().to_string();
+                    // `where` on Windows may return multiple lines; take the first
+                    let path = String::from_utf8_lossy(&output.stdout)
+                        .lines()
+                        .next()
+                        .unwrap_or("")
+                        .trim()
+                        .to_string();
                     if !path.is_empty() {
                         return Some(std::path::PathBuf::from(path));
                     }
