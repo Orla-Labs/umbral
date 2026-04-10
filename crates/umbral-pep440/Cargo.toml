@@ -1,0 +1,23 @@
+[package]
+name = "umbral-pep440"
+version = "0.4.0"
+description = "PEP 440 version parsing, normalization, specifiers, and ordering for Python packages"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+
+[dependencies]
+serde = { workspace = true }
+thiserror = { workspace = true }
+regex = { workspace = true }
+
+[dev-dependencies]
+proptest = { workspace = true }
+insta = { workspace = true }
+criterion = { workspace = true }
+
+[[bench]]
+name = "parsing"
+harness = false

@@ -1,0 +1,18 @@
+[package]
+name = "umbral-pep508"
+version = "0.4.0"
+description = "PEP 508 dependency specifier parsing, environment markers, and extras"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+
+[dependencies]
+umbral-pep440 = { workspace = true }
+serde = { workspace = true }
+thiserror = { workspace = true }
+url = { workspace = true }
+
+[dev-dependencies]
+insta = { workspace = true }

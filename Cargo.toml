@@ -1,0 +1,92 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/umbral-pep440",
+    "crates/umbral-pep508",
+    "crates/umbral-pypi-client",
+    "crates/umbral-project",
+    "crates/umbral-resolver",
+    "crates/umbral-lockfile",
+    "crates/umbral-venv",
+    "crates/umbral-installer",
+    "crates/umbral-cli",
+]
+
+[workspace.package]
+edition = "2021"
+rust-version = "1.80"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/moonshotideas/umbral"
+authors = ["Moonshot Ideas <opensource@moonshotideas.com>"]
+
+[workspace.dependencies]
+# Internal crates
+umbral-pep440 = { path = "crates/umbral-pep440" }
+umbral-pep508 = { path = "crates/umbral-pep508" }
+umbral-pypi-client = { path = "crates/umbral-pypi-client" }
+umbral-project = { path = "crates/umbral-project" }
+umbral-resolver = { path = "crates/umbral-resolver" }
+umbral-lockfile = { path = "crates/umbral-lockfile" }
+umbral-venv = { path = "crates/umbral-venv" }
+umbral-installer = { path = "crates/umbral-installer" }
+
+# Filesystem utilities
+tempfile = "3"
+
+# Version solving
+pubgrub = "0.2.1"
+
+# Serialization
+serde = { version = "1", features = ["derive"] }
+toml = "0.8"
+toml_edit = "0.22"
+serde_json = "1"
+
+# Async runtime & HTTP
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "time", "io-util", "net", "sync"] }
+reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "json", "gzip", "multipart"] }
+
+# CLI
+clap = { version = "4", features = ["derive"] }
+
+# Error handling
+thiserror = "2"
+miette = { version = "7", features = ["fancy"] }
+
+# Logging / tracing
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# Utilities
+url = { version = "2", features = ["serde"] }
+sha2 = "0.10"
+hex = "0.4"
+base64 = "0.22"
+dashmap = "6"
+indexmap = { version = "2", features = ["serde"] }
+chrono = { version = "0.4", features = ["serde"] }
+regex = "1"
+
+# HTML parsing (PEP 503)
+scraper = "0.22"
+
+# Glob patterns
+glob = "0.3"
+
+# Archive handling
+flate2 = "1"
+tar = "0.4"
+
+# ZIP reading (wheel metadata extraction)
+zip = "2"
+
+# Terminal output
+indicatif = "0.17"
+owo-colors = { version = "4", features = ["supports-colors"] }
+anstream = "0.6"
+
+# Testing
+insta = { version = "1", features = ["toml"] }
+wiremock = "0.6"
+proptest = "1"
+criterion = { version = "0.5", features = ["html_reports"] }

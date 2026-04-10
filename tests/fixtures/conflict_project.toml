@@ -1,0 +1,27 @@
+# This project has conflicting version constraints that should produce a
+# resolution error.  Used for testing human-readable error messages from
+# the resolver.
+
+[project]
+name = "conflict-app"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+    # numpy 1.x and numpy 2.x are not compatible — these constraints
+    # cannot be satisfied simultaneously.
+    "numpy>=2.0",
+    "pandas>=1.5,<2.0",
+    # pandas 1.x requires numpy<2.0, but we also require numpy>=2.0
+    # → unresolvable conflict.
+]
+
+[project.optional-dependencies]
+# This extra adds another angle of conflict.
+legacy = [
+    "numpy>=1.21,<1.26",
+    "scipy>=1.9,<1.12",
+]
+
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"

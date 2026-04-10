@@ -1,0 +1,22 @@
+[project]
+name = "depgroups-app"
+version = "1.2.0"
+requires-python = ">=3.10"
+dependencies = [
+    "flask>=3.0",
+]
+
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[dependency-groups]
+test = ["pytest>=8.0", "pytest-cov>=4.1", "coverage[toml]>=7.4"]
+lint = ["ruff>=0.2", "mypy>=1.8"]
+typing = [{include-group = "lint"}, "types-requests>=2.31"]
+dev = [
+    {include-group = "test"},
+    {include-group = "typing"},
+    "pre-commit>=3.6",
+    "ipython>=8.20",
+]

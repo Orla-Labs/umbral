@@ -1,0 +1,9 @@
+[project]
+name = "ruff"
+version = "0.4.0"
+description = "An extremely fast Python linter and code formatter, written in Rust."
+requires-python = ">=3.7"
+
+[build-system]
+requires = ["maturin>=1.0,<2.0"]
+build-backend = "maturin"
