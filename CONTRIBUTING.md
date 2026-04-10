@@ -13,7 +13,7 @@ Thank you for your interest in contributing to Umbral! This guide will help you 
 ### Getting Started
 
 ```bash
-git clone https://github.com/moonshotideas/umbral.git
+git clone https://github.com/Orla-Labs/umbral.git
 cd umbral
 cargo build
 cargo test --workspace
